@@ -1,0 +1,50 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 40px;
+    align-items: center;
+}
+.logo>h1{
+    font-size: 50px;
+}
+.logo>h1>span{
+    color: rgb(152 143 218);
+}
+.links>a{
+    margin: 10px 20px;
+    font-size: 18px;
+    
+}
+.links>.active{
+    color: rgb(184, 184, 184);
+}
+
+.dark_mode>input{
+    display: none;
+}
+.label1{
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    position: relative;
+    display: block;
+    border-radius: 10px;
+    z-index: 1;
+    top: 17.9px;
+    left: 16px;
+    transition: .5s ease-in-out;
+
+}
+.label2{
+    width: 35px;
+    height: 20px;
+    background-color: rgb(152 143 218);
+    position: relative;
+    display: block;
+    border-radius: 10px;
+}
+.dark_mode>input:checked + .label1{
+    left: 4px;
+    
+}

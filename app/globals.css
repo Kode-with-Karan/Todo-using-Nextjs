@@ -1,3 +1,6 @@
+
+
+
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
@@ -86,6 +89,7 @@ body {
 }
 
 body {
+  font-family: "Nunito", sans-serif !important;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -105,3 +109,25 @@ a {
     color-scheme: dark;
   }
 }
+
+@font-face { 
+  font-family: "Rubik"; 
+  src: url('../fonts/nuntio/Nunito-Regular.ttf'); 
+  font-weight: normal; 
+  font-style: normal; 
+} 
+
+@font-face { 
+  font-family: "Rubik"; 
+  src: url('../fonts/nuntio/Nunito-Bold.ttf'); 
+  font-weight: bold; 
+  font-style: normal; 
+} 
+
+@font-face { 
+  font-family: "Rubik"; 
+  src: url('../fonts/nuntio/Nunito-Italic.ttf'); 
+  font-weight: normal; 
+  font-style: italic; 
+}
+  

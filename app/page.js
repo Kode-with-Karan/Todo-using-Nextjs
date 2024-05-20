@@ -1,95 +1,93 @@
-import Image from "next/image";
+"use client"
 import styles from "./page.module.css";
+import { FaInbox, FaStar, FaTrashCan, FaRegCalendarCheck } from "react-icons/fa6";
+import { FaRegCalendarAlt } from "react-icons/fa";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Items from '../components/Items';
+import React, { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [add_task, setadd_task] = useState(0)
+  const [add_string, setadd_string] = useState([])
+  const [add_checkbox, setadd_checkbox] = useState([])
+  const [inputValue, setInputValue] = useState('');
+
+  // 0 = reset 
+  // 1 = writing 
+  // 2 = save
+
+  const btn_clicked = () => {
+    if (add_task == 0) {
+      setadd_task(1);
+    } else {
+      setadd_task(0);
+      setadd_string([...add_string, inputValue]);
+      setInputValue('');
+    }
+  }
+
+  const deleteTodo = () => {
+    console.log("Delete")
+    add_checkbox.reverse().forEach(element => {
+      console.log(element)
+      add_string.splice(element,1)
+      
+    });
+    console.log(add_string)
+    localStorage.setItem("nexttodo", add_string)
+    setadd_string([...add_string]);
+    setadd_checkbox([])
+    
+  }
+
+  useEffect(() => {
+    console.log("hnn triger hua")
+    setTimeout(() => {
+      console.log("pata nahi triger hua")
+      setadd_string(localStorage.getItem("nexttodo").split(","))
+    }, 1000);
+
+    
+  }, [])
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <Navbar nav="All" />
+      <div className={styles.main}>
+        <div className={styles.topics}>
+          <h1>Topics</h1>
+          <ul>
+            <li className={styles.invert_active} ><i><FaInbox /></i> All</li>
+            <li><i><FaStar /></i>Marked</li>
+            <li><i><FaRegCalendarCheck /></i>Today</li>
+            <li><i><FaRegCalendarAlt /></i>Week</li>
+          </ul>
+        </div>
+        <div className={styles.todos}>
+          <div className={styles.tasks}>
+            <div className={styles.taskHead}>
+            <h1>Tasks</h1>
+            <i onClick={()=>{deleteTodo()}}><FaTrashCan /></i>
+            </div>
+
+            <ul>  
+
+              <Items add_string = {add_string} setbox = {setadd_checkbox} addBox = {add_checkbox}/>
+          
+            </ul>
+          </div>
+          <div className={styles.add_task_btn}>
+            <form action="#" method="post" onSubmit={(e) => { e.preventDefault(); }} >
+              <input type="checkbox" name="add_task" id="add_task" unchecked="true" />
+              <input type="text" name="task" id="task" onChange={(e)=> setInputValue(e.target.value)}/>
+              <button type="submit"  ><label htmlFor="add_task" onClick={() => btn_clicked()}>{(add_task == 0) ? "Add Task" : "Add"}</label></button>
+            </form>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      <Footer />
+    </>
   );
 }
