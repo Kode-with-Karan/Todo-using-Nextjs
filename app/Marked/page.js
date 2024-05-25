@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const Marked = () => {
+
+  
+
   return (
     <>
     <Navbar nav="Marked"/> 
@@ -20,37 +23,26 @@ const Marked = () => {
         </ul>
       </div>
       <div className={styles.todos}>
-        <div>
+          <div className={styles.tasks}>
+            <div className={styles.taskHead}>
+            <h1>Tasks</h1>
+            <i onClick={()=>{deleteTodo()}}><FaTrashCan /></i>
+            </div>
 
-          <h1>Tasks</h1>
-          <ul>
-            <li>
-              <div className={styles.task_text}>
-                <input type="checkbox" name="task" id="task1" />
-                <label htmlFor="task1">Lorem ipsum dolor sit amet consectetur.</label>
-              </div>
-              <div className={styles.marks}>
+            <ul>  
 
-                <input type="checkbox" name="task" id="mark1" />
-                <label htmlFor="mark1"><i><FaStar /></i></label>
-              </div>
-            </li>
-            <li>
-              <div className={styles.task_text}>
-                <input type="checkbox" name="mark" id="task2" />
-                <label htmlFor="task2">Lorem ipsum dolor sit amet consectetur.</label>
-              </div>
-              <div className={styles.marks}>
-                <input type="checkbox" name="mark" id="mark2" />
-                <label htmlFor="mark2"><i><FaStar /></i></label>
-              </div>
-            </li>
-          </ul>
+              <Items add_string = {marked_string} setbox = {setadd_checkbox} addBox = {add_checkbox}/>
+          
+            </ul>
+          </div>
+          <div className={styles.add_task_btn}>
+            <form action="#" method="post" onSubmit={(e) => { e.preventDefault(); }} >
+              <input type="checkbox" name="add_task" id="add_task" unchecked="true" />
+              <input type="text" name="task" id="task" onChange={(e)=> setInputValue(e.target.value)}/>
+              <button type="submit"  ><label htmlFor="add_task" onClick={() => btn_clicked()}>{(add_task == 0) ? "Add Task" : "Add"}</label></button>
+            </form>
+          </div>
         </div>
-        <div className={styles.add_task_btn}>
-          <a href="">Add Task</a>
-        </div>
-      </div>
     </div>
     <Footer/>
   </>

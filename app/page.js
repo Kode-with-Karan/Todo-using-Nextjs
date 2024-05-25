@@ -19,32 +19,37 @@ export default function Home() {
 
   const btn_clicked = () => {
     if (add_task == 0) {
+      document.getElementById("task").value = "";
       setadd_task(1);
     } else {
+
       setadd_task(0);
       setadd_string([...add_string, inputValue]);
       setInputValue('');
+      localStorage.setItem("nexttodo", [...add_string, inputValue]);
     }
   }
 
   const deleteTodo = () => {
-    console.log("Delete")
     add_checkbox.reverse().forEach(element => {
-      console.log(element)
       add_string.splice(element,1)
       
     });
-    console.log(add_string)
     localStorage.setItem("nexttodo", add_string)
     setadd_string([...add_string]);
     setadd_checkbox([])
     
   }
 
+  // const submitForm = (e) =>{
+    
+  //   if(e.keyCode == 13){
+  //     btn_clicked();
+  //   }
+  // }
+
   useEffect(() => {
-    console.log("hnn triger hua")
     setTimeout(() => {
-      console.log("pata nahi triger hua")
       setadd_string(localStorage.getItem("nexttodo").split(","))
     }, 1000);
 
@@ -81,7 +86,7 @@ export default function Home() {
           <div className={styles.add_task_btn}>
             <form action="#" method="post" onSubmit={(e) => { e.preventDefault(); }} >
               <input type="checkbox" name="add_task" id="add_task" unchecked="true" />
-              <input type="text" name="task" id="task" onChange={(e)=> setInputValue(e.target.value)}/>
+              <input type="text" name="task" id="task" onChange={(e)=> setInputValue(e.target.value)} onKeyDown={(e)=>submitForm(e)}/>
               <button type="submit"  ><label htmlFor="add_task" onClick={() => btn_clicked()}>{(add_task == 0) ? "Add Task" : "Add"}</label></button>
             </form>
           </div>

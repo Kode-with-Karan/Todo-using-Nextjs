@@ -1,8 +1,7 @@
 import styles from "../app/page.module.css";
 import { FaInbox, FaStar, FaRegCalendarCheck } from "react-icons/fa6";
 import { FaRegCalendarAlt } from "react-icons/fa";
-
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Items = ({ add_string, setbox, addBox }) => {
 
@@ -15,6 +14,19 @@ const Items = ({ add_string, setbox, addBox }) => {
       setbox([...addBox, i])
     }
   }
+
+  useEffect(() => {
+    
+    if(addBox.length == "undefined" || addBox.length == 0){
+      for (let index = 0; index < add_string.length; index++) {
+        console.log(document.getElementById("task"+index).checked = false)
+        
+      }
+    }
+  
+  }, [addBox])
+  
+  
 
 
   return (
