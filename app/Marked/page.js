@@ -1,13 +1,63 @@
-import React from 'react'
+"use client"
 import styles from "../page.module.css";
-import { FaInbox, FaStar, FaRegCalendarCheck } from "react-icons/fa6";
+import { FaInbox, FaStar, FaRegCalendarCheck,FaTrashCan } from "react-icons/fa6";
 import { FaRegCalendarAlt } from "react-icons/fa";
+import Items from "../../components/Items";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import React, { useState, useEffect } from 'react';
 
 const Marked = () => {
 
-  
+  const [add_task, setadd_task] = useState(0)
+  const [add_string, setadd_string] = useState([])
+  const [marked_string, setmarked_string] = useState([])
+  const [add_checkbox, setadd_checkbox] = useState([])
+  const [inputValue, setInputValue] = useState('');
+
+  // 0 = reset 
+  // 1 = writing 
+  // 2 = save
+
+  const btn_clicked = () => {
+    if (add_task == 0) {
+      document.getElementById("task").value = "";
+      setadd_task(1);
+    } else {
+
+      setadd_task(0);
+      setadd_string([...add_string, inputValue]);
+      setInputValue('');
+      localStorage.setItem("nexttodo", [...add_string, inputValue]);
+    }
+  }
+
+  const deleteTodo = () => {
+    add_checkbox.reverse().forEach(element => {
+      add_string.splice(element,1)
+      
+    });
+    localStorage.setItem("nexttodo", add_string)
+    setadd_string([...add_string]);
+    setadd_checkbox([])
+    
+  }
+
+  // const submitForm = (e) =>{
+    
+  //   if(e.keyCode == 13){
+  //     btn_clicked();
+  //   }
+  // }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setadd_string(localStorage.getItem("nexttodo").split(","))
+      console.log(add_string)
+    }, 1000);
+
+    
+  }, [])
 
   return (
     <>
@@ -31,7 +81,7 @@ const Marked = () => {
 
             <ul>  
 
-              <Items add_string = {marked_string} setbox = {setadd_checkbox} addBox = {add_checkbox}/>
+              <Items add_string = {add_string} setbox = {setadd_checkbox} addBox = {add_checkbox}/>
           
             </ul>
           </div>
