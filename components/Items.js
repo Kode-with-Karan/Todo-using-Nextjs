@@ -18,7 +18,7 @@ const Items = ({ add_string, setbox, addBox, addMark, setMark }) => {
 
   const setfavMark = (i) => {
 
-    // console.log(addMark);
+    // console.log(i);
 
     if (addMark.indexOf(i) !== -1) {
       setMark(addMark.filter(item => item !== i))
@@ -34,18 +34,7 @@ const Items = ({ add_string, setbox, addBox, addMark, setMark }) => {
   }
 
 
-  useEffect(() => {
-    
-    
-    for (let index = 0; index < addMark.length; index++) {
-      console.log(document.getElementById("mark" + addMark[index]).checked = true)
 
-    }
-
-
-
-
-  }, [])
 
   useEffect(() => {
 
@@ -59,7 +48,20 @@ const Items = ({ add_string, setbox, addBox, addMark, setMark }) => {
 
   }, [addBox])
 
+  useEffect(() => {
+    
+    for (let index = 0; index < addMark.length; index++) {
+      if(addMark[index] != ''){
+        document.getElementById("mark" + addMark[index]).checked = true;
+        // console.log(addMark[index])
+      }
+      
+    }
 
+
+
+
+  }, [addMark])
 
 
 
