@@ -132,7 +132,7 @@ export default function Home() {
             <li className={styles.invert_active} ><i><FaInbox /></i> All</li>
             <li><i><FaStar /></i>Marked</li>
             <li><i><FaRegCalendarCheck /></i>Today</li>
-            <li><i><FaRegCalendarAlt /></i>Week</li>
+            <li><i><FaRegCalendarAlt /></i>This Week</li>
           </ul>
         </div>
         <div className={styles.todos}>

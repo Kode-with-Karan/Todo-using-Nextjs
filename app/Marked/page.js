@@ -40,15 +40,15 @@ const Marked = () => {
   const deleteTodo = () => {
 
     add_checkbox.reverse().forEach(forDel => {
-      add_string.forEach(fromDel => {
+      add_marked_string.forEach(fromDel => {
         if (fromDel.split("$->")[0] == forDel.split("$->")[0]) {
-          add_string.splice(add_string.indexOf(fromDel), 1)
+          add_marked_string.splice(add_marked_string.indexOf(fromDel), 1)
         }
       });
 
     });
-    localStorage.setItem("nexttodo", add_string)
-    setadd_string([...add_string]);
+    localStorage.setItem("nexttodo", add_marked_string)
+    setadd_marked_string([...add_marked_string]);
     setadd_checkbox([])
 
   }
@@ -113,7 +113,7 @@ const Marked = () => {
             <li><i><FaInbox /></i> All</li>
             <li className={styles.invert_active} ><i><FaStar /></i>Marked</li>
             <li><i><FaRegCalendarCheck /></i>Today</li>
-            <li><i><FaRegCalendarAlt /></i>Week</li>
+            <li><i><FaRegCalendarAlt /></i>This Week</li>
           </ul>
         </div>
         <div className={styles.todos}>
@@ -122,9 +122,6 @@ const Marked = () => {
               <h1>Tasks</h1>
               <i onClick={() => { deleteTodo() }}><FaTrashCan /></i>
             </div>
-            {
-
-            }
             <ul>
 
               <Items add_string={add_marked_string} setbox={setadd_checkbox} addBox={add_checkbox} setMark={setadd_mark} addMark={add_mark} />

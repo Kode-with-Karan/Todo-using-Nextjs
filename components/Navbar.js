@@ -13,7 +13,7 @@ const Navbar = (props) => {
             <Link href={"/"} className={(props.nav == "All")?styles.active:""}>All</Link>
             <Link href={"/Marked"} className={(props.nav == "Marked")?styles.active:""}>Marked</Link>
             <Link href={"/Today"} className={(props.nav == "Today")?styles.active:""}>Today</Link>
-            <Link href={"/Week"} className={(props.nav == "Week")?styles.active:""}>Week</Link>
+            <Link href={"/Week"} className={(props.nav == "Week")?styles.active:""}>This Week</Link>
         </div>
 
         <div className={styles.dark_mode}>

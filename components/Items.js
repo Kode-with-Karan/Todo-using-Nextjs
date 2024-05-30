@@ -51,7 +51,7 @@ const Items = ({ add_string, setbox, addBox, addMark, setMark }) => {
   useEffect(() => {
     
     for (let index = 0; index < addMark.length; index++) {
-      if(addMark[index] != ''){
+      if((addMark[index] != '') && (document.getElementById("mark" + addMark[index]) != null)){
         document.getElementById("mark" + addMark[index]).checked = true;
         // console.log(addMark[index])
       }
